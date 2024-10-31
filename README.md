@@ -1,5 +1,5 @@
-# Minimalist example of model integration with CHAP 
-This document demonstrates a minimalist example of how to write a CHAP-compatible forecasting model. The example is written in Python, uses few variables without any lag and a standard machine learning model. It simply learns a linear regression from rain and temperature to disease cases in the same month, without considering any previous disease or climate data. It also assumes and works only with a single region. The model is not meant to accurately capture any interesting relations - the purpose is just to show how CHAP integration works in a simplest possible setting. 
+# A template for model integration with CHAP 
+This template provides a foundational code structure in Python for integrating models with CHAP. It includes essential components for model training and forecasting but is not designed to run immediately. For a complete, runnable example, please find to the "minimalist_example" repository.
 
 ## Running the model without CHAP integration
 Before getting a new model to work as part of CHAP, it can be useful to develop and debug it while running it directly a small dataset from file. 
@@ -30,18 +30,12 @@ time_period,rainfall,mean_temperature,disease_cases,location
 ```
 
 ### Training the model
-The file "train.py" contains the code to train a model. It reads in training data from a csv file to a Pandas data frame. It learns a linear regression from rainfall and mean_temperature (X) to disease_cases (Y). The trained model is stored to file using the joblib library:
+The file "train.py" contains the code to train a model. It reads in training data from a csv file to a Pandas data frame. Then insert a code to train the model and store it to file using e.g. joblib:
 ```
 def train(csv_fn, model_fn):
     df = pd.read_csv(csv_fn)
-    #print all column names (without any being skipped)
-    features = ['rainfall', 'mean_temperature']
-    X = df[features] #What if we wanted last months disease cases - how to easily get lagged data
-    Y = df['disease_cases']
-    model = LinearRegression()
-    model.fit(X, Y)
-    joblib.dump(model, model_fn)
-    print("Train - model coefficients: ", list(zip(features,model.coef_)))
+
+    # Here you train your model based on the data in df, and save it to model.bin
 ```
 ### Future climate data
 A minimalist future (predicted) climate data is provided in a file "futureClimateData.csv". This file contains climate data for what is considered to be future periods (weather forecasts). It naturally contains no disease data):  
@@ -57,13 +51,8 @@ The file "predict.py" contains the code to forecast disease cases ahead in time 
 ```
 def predict(model_fn, future_climatedata_fn, predictions_fn):
     df = pd.read_csv(future_climatedata_fn)
-    X = df[['rainfall', 'mean_temperature']]
-    model = joblib.load(model_fn)
 
-    y_pred = model.predict(X)
-    df['disease_cases'] = y_pred
-    df.to_csv(predictions_fn, index=False)
-    print("predict - forecast values: ", y_pred)
+    # Here you use your trained model to predict disease cases on the data in df, and write them out to predictions.csv
 ```
 
 ## Running the minimalist model as part of CHAP
