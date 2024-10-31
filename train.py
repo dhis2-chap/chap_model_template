@@ -4,24 +4,10 @@ import joblib
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-
-def read_pandas_from_csv(csv_file):
-    df = pd.read_csv(csv_file)
-    return df
-
-#print(read_pandas_from_csv("trainData.csv"))
-
-#SHOWN TO USER
 def train(csv_fn, model_fn):
     df = pd.read_csv(csv_fn)
-    #print all column names (without any being skipped)
-    features = ['rainfall', 'mean_temperature']
-    X = df[features] #What if we wanted last months disease cases - how to easily get lagged data
-    Y = df['disease_cases']
-    model = LinearRegression()
-    model.fit(X, Y)
-    joblib.dump(model, model_fn)
-    print("Train - model coefficients: ", list(zip(features,model.coef_)))
+
+    # Here you train your model based on the data in df, and save it to model.bin
 
 
 if __name__ == "__main__":
