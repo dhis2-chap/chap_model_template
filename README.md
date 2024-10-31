@@ -1,5 +1,5 @@
 # Template for model integration with CHAP 
-This template provides a foundational code structure in Python for integrating models with CHAP. It includes essential components for model training and forecasting but is not designed to run immediately. For a complete, runnable example, please find to the "minimalist_example" repository.
+This template provides a foundational code structure in Python for integrating models with CHAP. It includes essential components for model training and forecasting but is not designed to run immediately. For a complete, runnable example, please see to the "minimalist_example" repository.
 
 ## Running the model without CHAP integration
 Before getting a new model to work as part of CHAP, it can be useful to develop and debug it while running it directly a small dataset from file. 
