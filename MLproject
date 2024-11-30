@@ -1,10 +1,4 @@
-name: min_py_ex
-
-adapters: {'disease_cases': 'disease_cases',
-           'location': 'location',
-           'time_period': 'time_period',
-           'rainfall': 'rainfall',
-           'mean_temperature': 'mean_temperature'}
+name: min_py_template
 
 entry_points:
   train:
